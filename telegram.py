@@ -58,7 +58,7 @@ def num_func():
 
 
 
-bot = Bot(token='5536823787:AAGYsFBVz1WVS_3kBPZQ9MKCAOSTBUw-1zY')
+bot = Bot(token='your token')
 dp = Dispatcher(bot)
 
 
