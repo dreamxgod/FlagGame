@@ -1,12 +1,10 @@
 import logging
 
-import aiogram.utils.markdown as md
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ParseMode
 from aiogram.utils import executor
 from os import environ
 from glob import glob
@@ -19,7 +17,9 @@ API_TOKEN = environ.get('TELEGRAM_BOT_TOKEN')
 
 if API_TOKEN == None:
     logging.fatal(
-        "Set your's bot token in $TELEGRAM_BOT_TOKEN environment variable.")
+        "Set your's bot token in $TELEGRAM_BOT_TOKEN environment variable.\n \
+        To do it, run the following command: \n \
+        export TELEGRAM_BOT_TOKEN='<your_token'>")
     exit(-1)
 
 bot = Bot(token=API_TOKEN)
@@ -37,11 +37,9 @@ class Game(StatesGroup):
 
 files = glob("./pictures/*.png")
 
-logging.info(files)
-
 
 @dp.message_handler(commands='start')
-async def cmd_start(message: types.Message, state: FSMContext):
+async def cmd_start(message: types.Message):
     """
     Conversation's entry point
     """
