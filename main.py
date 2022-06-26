@@ -1,333 +1,97 @@
-import random
-import time
-from PIL import Image
-def continue_function():
-    status = input("1 - continue \n 2 - end\n")
-    if (status == "1"):
-        num1  = random.randrange(1,61)
-        flag_function(num1)
-    else:
-        exit()  
-    return  
+from aiogram import Bot, Dispatcher, types
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
+from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.utils import executor
+from os import environ
+from glob import glob
+from random import randrange
+from pathlib import Path
+import logging
 
-def flag_function(num):
-    if num == 1:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/angola.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
+logging.basicConfig(level=logging.INFO)
+API_TOKEN = environ.get('TELEGRAM_BOT_TOKEN')
+if API_TOKEN == None:
+    logging.fatal(
+        "Set your's bot token in $TELEGRAM_BOT_TOKEN environment variable.\n \
+        To do it, run the following command: \n \
+        export TELEGRAM_BOT_TOKEN='<your_token'>")
+    exit(-1)
 
-    elif num == 2:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/angola.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 3:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/canada.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 4:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/algeria.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 5:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/argentina.png")
-        im1.show() 
-        time.sleep(10)
-        continue_function()       
-    elif num == 6:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/austria.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 7:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/armenia.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 8:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/australia.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 9:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/austria.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 10:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/austria.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 11:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/azerbajan.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 12:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/bahrein.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 13:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/bangladesh.png")
-        im1.show() 
-        time.sleep(10)
-        continue_function()   
-    elif num == 14:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/belgium.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 15:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/brazil.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 16:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/britain.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 17:
-        im1 = Image.open("//Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/cambodja.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 18:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/cameroon.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 19:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/chile.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 20:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/china.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 21:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/columbia.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 22:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/congo.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 23:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/costarica.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 24:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/crotia.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 25:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/cuba.png")
-        im1.show()  
-        time.sleep(10)
-        continue_function()
-    elif num == 26:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/cyprus.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 15:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/czeck.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 27:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/denmark.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 28:
-        im1 = Image.open("//Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/dominicana.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 29:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/finland.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 30:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/france.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 31:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/georgia.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 32:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/germany.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 33:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/ghana.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 34:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/iceland.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 35:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/india.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 36:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/indonesia.png")
-        im1.show() 
-        time.sleep(10)
-        continue_function()
-    elif num == 37:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/ireland.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 38:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/israel.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 39:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/italy.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 40:
-        im1 = Image.open("//Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/korea.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 41:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/laos.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 42:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/lithuania.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 43:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/luxemburg.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 44:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/madagaskar.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 45:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/nederlands.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 46:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/niger.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 47:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/norway.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 48:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/oae.png")
-        im1.show() 
-        time.sleep(10)
-        continue_function()
-    elif num == 49:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/poland.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 50:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/portugal.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 51:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/qatar.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 52:
-        im1 = Image.open("//Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/senegal.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 53:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/south_africa.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 54:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/spain.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 55:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/sweden.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 56:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/switc.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 57:
-        im2 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/uganda.png")
-        im2.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 58:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/ukraine.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 59:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/urugvay.png")
-        im1.show()
-        time.sleep(10)
-        continue_function()
-    elif num == 60:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/usa.png")
-        im1.show() 
-        time.sleep(10)
-        continue_function()
-    elif num == 61:
-        im1 = Image.open("/Users/ivankalinets/Documents/KPI/programming /FlagGame/pictures/zimbabwe.png")
-        im1.show() 
-        time.sleep(10)
-        num1  = random.randrange(1,61)
-        flag_function(num1)                     
-    else :
-        print("aboba")       
-        
-    return
+bot = Bot(token=API_TOKEN)
+
+# For example use simple MemoryStorage for Dispatcher.
+storage = MemoryStorage()
+dp = Dispatcher(bot, storage=storage)
 
 
-num  = random.randrange(1,61)
-flag_function(num)
+# States
+class Game(StatesGroup):
+    question = State()
+    answer = State()
+
+
+files = glob("./pictures/*.png")
+
+
+@dp.message_handler(commands='start')
+async def cmd_start(message: types.Message):
+    """
+    Conversation's entry point
+    """
+    # Set state
+    await Game.question.set()
+    await message.reply("Lets play the game (type something to continue)")
+
+
+@dp.message_handler(state=Game.question)
+async def question_handler(message: types.Message, state: FSMContext):
+    number = randrange(0, len(files))
+    file = files[number]
+    answer = Path(file).stem
+    async with state.proxy() as data:
+        data['answer'] = answer
+
+    logging.info(file)
+    await Game.next()
+    await bot.send_photo(chat_id=message.chat.id, photo=open(file, 'rb'))
+    await message.reply("Guess country by flag")
+
+
+# You can use state '*' if you need to handle all states
+@dp.message_handler(state='*', commands='cancel')
+@dp.message_handler(Text(equals='cancel', ignore_case=True), state='*')
+async def cancel_handler(message: types.Message, state: FSMContext):
+    """
+    Allow user to cancel any action
+    """
+    current_state = await state.get_state()
+    if current_state is None:
+        return
+
+    logging.info('Cancelling state %r', current_state)
+    # Cancel state and inform user about it
+    await state.finish()
+    # And remove keyboard (just in case)
+    await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
+
+
+@dp.message_handler(state=Game.answer)
+async def process_answer(message: types.Message, state: FSMContext):
+    # Update state and data
+    answer = message.text
+    async with state.proxy() as data:
+        if answer.casefold() == str(data['answer']).casefold():
+            await Game.question.set()
+            reply = "correct! (type something to continue)"
+        else:
+            reply = "try again (or reply /cancel to surrender)"
+
+    # Configure ReplyKeyboardMarkup
+
+    await message.reply(reply)
+
+
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
